@@ -1,53 +1,76 @@
+# OverTheWire: Bandit – Level 1 → Level 2
 
-# OverTheWire: Bandit - Level 2
+## 🧠 Objective
 
-## 🎯 Level Goal
-
-The password for the next level is stored in a file called `spaces in this filename` located in the home directory.
-
----
-
-## 🧠 What You Learn
-
-- Handling filenames with spaces
-- Using quotes or escape characters in the command line
+The goal of this level is to find the password for the next level, which is **stored in a file named `-`** (just a hyphen).
 
 ---
 
-## 🛠️ Solution Strategy
+## 🔐 Login Information
 
-Filenames with spaces need to be wrapped in quotes or escaped with backslashes.
+- **Username:** `bandit1`
+- **Hostname:** `bandit.labs.overthewire.org`
+- **Port:** `2220`
+- **Password:** `NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL`  (demo password)
 
-### ✅ Correct Commands:
+---
+
+## 🧪 Steps to Solve Level 1
+
+### ✅ Step 1: Connect to the server
+
+Use the following SSH command:
 
 ```bash
-cat "spaces in this filename"
+ssh bandit1@bandit.labs.overthewire.org -p 2220
 ```
+When prompted, enter the password: `NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL`
 
-OR
+---
+
+### ✅ Step 2: List files
 
 ```bash
-cat spaces\ in\ this\ filename
+ls
 ```
 
----
+You will see a file named:
 
-## 🔍 Commands Used
+```
+-
+```
 
-- `cat`: To read file content
-- `ls`: To check the file is there
-
----
-
-## 🔑 Output (Password for Level 3)
-
-After using one of the commands above, you’ll see the password for Level 3.
+> ⚠️ Special character alert: The hyphen `-` is interpreted as an **option flag** in many commands. So you must handle it carefully.
 
 ---
 
-## 🚀 Moving to the Next Level
+### ✅ Step 3: Read the file named `-`
 
-Use the password you just found and connect to Level 2:
+To avoid confusion with command-line options, you can use:
+
+```bash
+cat ./-
+```
+
+This forces the shell to treat `-` as a file name instead of a flag.
+
+You will see an output like:
+
+```bash
+rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi # demo password
+```
+
+That is your **Level 2 password** ✅
+
+---
+
+## 🔐 Password for Level 2
+
+```bash
+rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
+```
+
+To log in to the next level:
 
 ```bash
 ssh bandit2@bandit.labs.overthewire.org -p 2220
@@ -55,7 +78,19 @@ ssh bandit2@bandit.labs.overthewire.org -p 2220
 
 ---
 
-## 📓 Notes
+## 📘 Commands Used
 
-This level emphasizes careful handling of file names that contain spaces. In Linux, spaces are treated as argument separators unless quoted or escaped.
+| Command   | Description                            |
+|-----------|----------------------------------------|
+| `ls`      | Lists files in the current directory   |
+| `cat`     | Displays the content of a file         |
+| `./-`     | Access the file named `-` using relative path |
 
+---
+
+## ✅ Summary
+
+- You learned how to read files with special names like `-`.
+- You used relative path (`./`) to avoid command interpretation issues.
+
+You're now ready for **Level 2 → Level 3**! 🎉
