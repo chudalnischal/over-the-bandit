@@ -1,58 +1,65 @@
+# OverTheWire: Bandit – Level 0 → Level 1
 
-# OverTheWire: Bandit - Level 1
+## 🧠 Objective
 
-## 🎯 Level Goal
-
-The password for the next level is stored in a file called `-` located in the home directory.
-
----
-
-## 🧠 What You Learn
-
-- Handling filenames that start with special characters (like `-`)
-- Using `cat` and understanding command-line flags
-- Quoting and escaping filenames
+The goal of this level is to **connect to the Bandit server using SSH** and **find the password** for the next level (Level 1).
 
 ---
 
-## 🛠️ Solution Strategy
+## 🔐 Login Information
 
-Normally, `cat -` means "read from stdin." But here, the file itself is named `-`, so we need to avoid confusion by explicitly telling the shell it's a file.
+- **Username:** `bandit0`
+- **Hostname:** `bandit.labs.overthewire.org`
+- **Port:** `2220`
 
-### ✅ Correct Command:
+---
+
+## 🧪 Steps to Solve Level 0
+
+### ✅ Step 1: Connect to the server
+
+Use the following SSH command in your terminal:
 
 ```bash
-cat ./-
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+#When prompted for a password, enter:
+
+bandit0
 ```
+💡 Tip: If you're using Windows, you can use PowerShell, Windows Terminal, or WSL (Windows Subsystem for Linux).
 
-Here, `./-` refers to the file `-` in the current directory. The `./` prefix helps avoid confusion with options (flags).
+### ✅ Step 2: Find the password
+Once connected, you'll see a welcome message. Now, run:
 
----
+```bash
+ls
+# This lists the files in the current directory. You’ll see a file named:
+readme
+#Use cat to display the contents:
+cat readme
+# This will output something like:
+NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL  # this is not the exact password!!
+```
+That is your Level 1 password ✅
 
-## 🔍 Commands Used
-
-- `cat`: To read and display the content of a file
-- `ls`: To list files in the directory
-
----
-
-## 🔑 Output (Password for Level 2)
-
-After running the correct command, you’ll get the password needed to move on to the next level.
-
----
-
-## 🚀 Moving to the Next Level
-
-Use the password from this level and connect to Level 1 like this:
+### 🔐 Password for Level 1
+```bash
+NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
+```
+You will use this password to log in to Level 1:
 
 ```bash
 ssh bandit1@bandit.labs.overthewire.org -p 2220
 ```
 
----
+### 📘 Commands Used
+Command	Description
+- **ssh**:	Connects to a remote machine
+- **ls**:	Lists files in a directory
+- **cat**:	Displays file contents
 
-## 📓 Notes
-
-This level teaches the importance of being careful with filenames and how special characters can change how a command behaves.
-
+### ✅ Summary
+- You learned how to connect using SSH.
+- You listed the files using ls.
+- You read the password file using cat.
+- You're ready to move on to Level 1 → Level 2! 🚀
